@@ -3,6 +3,9 @@ import './App.css';
 import Header from './Header';
 import Footer from './Footer';
 import MessageBoard from './MessageBoard';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 
 var messageBrd = [{id : 1, name : "Bill", message : "Hi All!"},
                   {id : 2, name : "Ann", message : "ICS 221 is fun!"},
@@ -13,9 +16,17 @@ var messageBrd = [{id : 1, name : "Bill", message : "Hi All!"},
 
 export const App = ({className}) => (
   <div className={className}>
-    <Header />
-    <MessageBoard messageBrd = {messageBrd}/>
-    <Footer />
+    <Container>
+      <Row>
+      <Col><Header /></Col>
+    </Row>
+    <Row>
+      <Col><MessageBoard messageBrd = {messageBrd}/></Col>
+    </Row>
+    <Row>
+      <Col><Footer /></Col>
+    </Row>
+</Container>
   </div>
 )
 
