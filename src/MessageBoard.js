@@ -1,9 +1,11 @@
 import React from 'react';
 import MessageRow from './MessageRow';
+import Table from 'react-bootstrap/Table';
 
 export const MessageBoard = ({className, messageBrd}) => (
     <div className={className}>
-        <table>
+        <Table striped bordered hover variant ="dark">
+            <tbody>
            <tr>
                <th>#</th>
                <th>Name</th>
@@ -13,7 +15,8 @@ export const MessageBoard = ({className, messageBrd}) => (
                {messageBrd.map(message =>
                     <MessageRow key={message.id} {...message} />
                 )}
-        </table>
+                </tbody>
+        </Table>
     </div>
 )
 
