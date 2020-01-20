@@ -3,6 +3,7 @@ import './App.css';
 import Header from './Header';
 import Footer from './Footer';
 import MessageBoard from './MessageBoard';
+import MessageForm from './MessageForm';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -19,6 +20,9 @@ export const App = ({className}) => (
     <Container>
       <Row>
         <Col><Header /></Col>
+      </Row>
+      <Row>
+        <Col><MessageForm /></Col>
       </Row>
       <Row>
         <Col><MessageBoard messageBrd = {messageBrd}/></Col>
