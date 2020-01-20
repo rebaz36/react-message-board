@@ -18,15 +18,15 @@ export const App = ({className}) => (
   <div className={className}>
     <Container>
       <Row>
-      <Col><Header /></Col>
-    </Row>
-    <Row>
-      <Col><MessageBoard messageBrd = {messageBrd}/></Col>
-    </Row>
-    <Row>
-      <Col><Footer /></Col>
-    </Row>
-</Container>
+        <Col><Header /></Col>
+      </Row>
+      <Row>
+        <Col><MessageBoard messageBrd = {messageBrd}/></Col>
+      </Row>
+      <Row>
+        <Col><Footer /></Col>
+      </Row>
+    </Container>
   </div>
 )
 
