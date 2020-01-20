@@ -3,7 +3,25 @@ import Card from 'react-bootstrap/Card';
 import Form from 'react-bootstrap/Form';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
+import * as yup from 'yup';
 
+const schema = yup.object({
+    name: yup
+    .string()
+    .trim()
+    .min(2, 'Your name must be at least 2 characters!')
+    .max(10, 'Your name cannot be more than 10 character.')
+    .matches(/[A-za-z]{2,}/, 'Invalid name. Use Upper or Lowercase letters only')
+    .required('Your name is required.'),
+    msg: yup
+    .string()
+    .trim()
+    .min(3, 'Your messaged must be at least 3 character!')
+    .max(20, 'Your message must be no more than 20 character.')
+    .required('A message is required')
+});
+
+//Spacing Not working for Card
 export const MessageForm = ({className}) => (
     <div className={className}>
         <Form>
