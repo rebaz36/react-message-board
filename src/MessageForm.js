@@ -4,6 +4,9 @@ import Form from 'react-bootstrap/Form';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import * as yup from 'yup';
+import { Formik } from 'formik';
+
+const handleFormData = (values, actions) => { console.log(values); }
 
 const schema = yup.object({
     name: yup
@@ -21,21 +24,56 @@ const schema = yup.object({
     .required('A message is required')
 });
 
+
+
 //Spacing Not working for Card
 export const MessageForm = ({className}) => (
     <div className={className}>
-        <Form>
+        <Formik
+        validationSchema={schema}
+        onSubmit={handleFormData}
+        initialValues={{ name: '', msg: ''}}
+        >
+        { // Your Form is passed to Formik as a function
+        ({
+        handleSubmit,
+        handleChange,
+        handleBlur,
+        values,
+        touched,
+        errors,
+        }) => (
+        //Your Form goes here
+        <Form noValidate onSubmit={handleSubmit}>
         <Card spacing="mb-4">
             <Card.Body padding="2px">
                 <Card.Title>Add a Message:</Card.Title>
                 <Form.Row className="align-items-center">
                     <Form.Group as={Col} controlId="name">
                         <Form.Label>Enter Name:</Form.Label>
-                        <Form.Control placeholder="Your name"></Form.Control>
+                        <Form.Control placeholder="Your name" 
+                        value={values.name}
+                        onChange={handleChange}
+                        onBlue={handleBlur}
+                        isValid={touched.name && !errors.name}
+                        isInvalid={touched.name && errors.name}
+                        ></Form.Control>
+                        <Form.Control.Feedback type="invalid">
+                            {errors.name}
+                        </Form.Control.Feedback>
                     </Form.Group>
                     <Form.Group as={Col} md={6} controlId="msg">
                         <Form.Label>Enter Message:</Form.Label>
-                        <Form.Control placeholder="Your message"></Form.Control>
+                        <Form.Control placeholder="Your message"
+                        value={values.msg}
+                        onChange={handleChange}
+                        onBlue={handleBlur}
+                        isValid={touched.msg && !errors.msg}
+                        isInvalid={touched.msg && errors.msg}
+                        ></Form.Control>
+                    <Form.Control.Feedback type="invalid">
+                        {errors.msg}
+                    </Form.Control.Feedback>
                     </Form.Group>
                     <Col>
                     <Button variant="primary" type="submite" className="mt-3">Submit</Button>
@@ -44,6 +82,9 @@ export const MessageForm = ({className}) => (
             </Card.Body>
         </Card>
         </Form>
+        )
+    }
+    </Formik>
     </div>
 )
 
