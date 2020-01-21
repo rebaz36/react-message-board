@@ -8,21 +8,31 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
-var messageBrd = [{id : 1, name : "Bill", message : "Hi All!"},
-                  {id : 2, name : "Ann", message : "ICS 221 is fun!"},
-                  {id : 3, name : "Johnny", message : "I'm stranded!"},
-                  {id : 4, name : "Barb", message : "Hi"},
-                  {id : 5, name : "Frank", message : "Who's tired?"},
-                  {id : 6, name : "Sarah", message : "I heart React"}]
 
-export const App = ({className}) => (
+
+export const App = ({className}) => {
+  
+
+  const [messageBrd, setMessageBrd] = React.useState([
+  {id : 1, name : "Bill", msg : "Hi All!"},
+  {id : 2, name : "Ann", msg : "ICS 221 is fun!"},
+  {id : 3, name : "Johnny", msg : "I'm stranded!"},
+  {id : 4, name : "Barb", msg : "Hi"},
+  {id : 5, name : "Frank", msg : "Who's tired?"},
+  {id : 6, name : "Sarah", msg : "I heart React"}]);
+
+  const handleCallBack = (values =>{
+    setMessageBrd([values, ...messageBrd])
+  })
+  return (
+
   <div className={className}>
     <Container>
       <Row>
         <Col><Header /></Col>
       </Row>
       <Row>
-        <Col><MessageForm /></Col>
+        <Col><MessageForm handleCallBack= {handleCallBack}/></Col>
       </Row>
       <Row>
         <Col><MessageBoard messageBrd = {messageBrd}/></Col>
@@ -32,6 +42,6 @@ export const App = ({className}) => (
       </Row>
     </Container>
   </div>
-)
+  )}
 
 export default App;

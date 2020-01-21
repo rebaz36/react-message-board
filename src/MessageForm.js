@@ -6,7 +6,7 @@ import Button from 'react-bootstrap/Button';
 import * as yup from 'yup';
 import { Formik } from 'formik';
 
-const handleFormData = (values, actions) => { console.log(values); }
+
 
 const schema = yup.object({
     name: yup
@@ -27,7 +27,14 @@ const schema = yup.object({
 
 
 //Spacing Not working for Card
-export const MessageForm = ({className}) => (
+export const MessageForm = ({className,handleCallBack}) =>  {
+
+    const handleFormData = (values, actions) => { 
+        handleCallBack(values);
+        console.log(values);
+        actions.setSubmitting(false); }
+ return (
+
     <div className={className}>
         <Formik
         validationSchema={schema}
@@ -54,7 +61,7 @@ export const MessageForm = ({className}) => (
                         <Form.Control placeholder="Your name" 
                         value={values.name}
                         onChange={handleChange}
-                        onBlue={handleBlur}
+                        onBlur={handleBlur}
                         isValid={touched.name && !errors.name}
                         isInvalid={touched.name && errors.name}
                         ></Form.Control>
@@ -67,7 +74,7 @@ export const MessageForm = ({className}) => (
                         <Form.Control placeholder="Your message"
                         value={values.msg}
                         onChange={handleChange}
-                        onBlue={handleBlur}
+                        onBlur={handleBlur}
                         isValid={touched.msg && !errors.msg}
                         isInvalid={touched.msg && errors.msg}
                         ></Form.Control>
@@ -87,5 +94,6 @@ export const MessageForm = ({className}) => (
     </Formik>
     </div>
 )
+}
 
 export default MessageForm;

@@ -1,10 +1,10 @@
 import React from 'react';
 
-export const MessageRow = ({id, name, message}) => (
+export const MessageRow = ({id, name, msg}) => (
     <tr>
         <td>{id}</td>
         <td>{name}</td>
-        <td>{message}</td>
+        <td>{msg}</td>
     </tr>
 )
 
