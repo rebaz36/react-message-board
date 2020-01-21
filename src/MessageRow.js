@@ -1,8 +1,8 @@
 import React from 'react';
 
-export const MessageRow = ({id, name, msg}) => (
+export const MessageRow = ({number, name, msg}) => (
     <tr>
-        <td>{id}</td>
+        <td>{number}</td>
         <td>{name}</td>
         <td>{msg}</td>
     </tr>

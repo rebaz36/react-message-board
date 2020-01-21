@@ -52,7 +52,7 @@ export const MessageForm = ({className,handleCallBack}) =>  {
         }) => (
         //Your Form goes here
         <Form noValidate onSubmit={handleSubmit}>
-        <Card spacing="mb-4">
+        <Card className="mb-4">
             <Card.Body padding="2px">
                 <Card.Title>Add a Message:</Card.Title>
                 <Form.Row className="align-items-center">

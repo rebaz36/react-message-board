@@ -14,12 +14,12 @@ export const App = ({className}) => {
   
 
   const [messageBrd, setMessageBrd] = React.useState([
-  {id : 1, name : "Bill", msg : "Hi All!"},
-  {id : 2, name : "Ann", msg : "ICS 221 is fun!"},
-  {id : 3, name : "Johnny", msg : "I'm stranded!"},
-  {id : 4, name : "Barb", msg : "Hi"},
-  {id : 5, name : "Frank", msg : "Who's tired?"},
-  {id : 6, name : "Sarah", msg : "I heart React"}]);
+  { name : "Bill", msg : "Hi All!"},
+  { name : "Ann", msg : "ICS 221 is fun!"},
+  { name : "Johnny", msg : "I'm stranded!"},
+  { name : "Barb", msg : "Hi"},
+  { name : "Frank", msg : "Who's tired?"},
+  { name : "Sarah", msg : "I heart React"}]);
 
   const handleCallBack = (values =>{
     setMessageBrd([values, ...messageBrd])

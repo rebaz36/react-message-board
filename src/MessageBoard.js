@@ -12,8 +12,8 @@ export const MessageBoard = ({className, messageBrd}) => (
                <th>Message</th>
                 
            </tr>
-               {messageBrd.map(message =>
-                    <MessageRow key={message.id} {...message} />
+               {messageBrd.map((message,index) =>
+                    <MessageRow key={index} number={index +1} msg={message.msg} name = {message.name} />
                 )}
                 </tbody>
         </Table>
