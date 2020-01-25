@@ -24,8 +24,6 @@ const schema = yup.object({
     .required('A message is required')
 });
 
-
-
 //Spacing Not working for Card
 export const MessageForm = ({className,handleCallBack}) =>  {
 
