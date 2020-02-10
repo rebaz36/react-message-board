@@ -4,7 +4,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import MessageForm from './MessageForm';
 import MessageBoard from './MessageBoard';
-
+//This should be a GET
 export const FormBoard = () => {
 const [messageBrd, setMessageBrd] = React.useState([
     { name : "Bill", msg : "Hi All!"},
