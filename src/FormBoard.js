@@ -6,22 +6,50 @@ import MessageForm from './MessageForm';
 import MessageBoard from './MessageBoard';
 //This should be a GET
 export const FormBoard = () => {
-const [messageBrd, setMessageBrd] = React.useState([
-    { name : "Bill", msg : "Hi All!"},
-    { name : "Ann", msg : "ICS 221 is fun!"},
-    { name : "Johnny", msg : "I'm stranded!"},
-    { name : "Barb", msg : "Hi"},
-    { name : "Frank", msg : "Who's tired?"},
-    { name : "Sarah", msg : "I heart React"}]);
+const [messageBrd, setMessageBrd] = React.useState([]);
+React.useEffect( () => {
+  (async () => {
+    try {
+      const response = await(await fetch('http://10.21.75.37:3004/messages')).json();
+      console.log(response);
+      setMessageBrd(response);
+    }catch(error){
+      console.log('API Error: ' + error);
+    }
+  })();
+},[]);
+
   
     const handleCallBack = (values =>{
-      setMessageBrd([values, ...messageBrd])
+      // setMessageBrd([values, ...messageBrd])
+      (async () => {
+      
+        try {
+          // Make an API Request and store the Response
+          await fetch(`http://10.21.75.37:3004/messages`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              "name" : values.name,
+              "msg" : values.msg
+            })
+            
+          });
+          console.log(JSON.stringify(values));
+        } catch (error) {
+          // This is for Networking Errors
+          console.log('API Error: ' + error);
+        }
+      })();
+    
     })
 return (
 
     <div>
     <Row>
-        <Col><MessageForm handleCallBack= {handleCallBack}/></Col>
+        <Col><MessageForm handleCallBack = {handleCallBack} /></Col>
       </Row>
       <Row>
         <Col><MessageBoard messageBrd = {messageBrd}/></Col>
