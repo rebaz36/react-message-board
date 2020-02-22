@@ -21,7 +21,7 @@ React.useEffect( () => {
 
   
     const handleCallBack = (values =>{
-      // setMessageBrd([values, ...messageBrd])
+      
       (async () => {
       
         try {
@@ -37,6 +37,7 @@ React.useEffect( () => {
             })
             
           });
+          setMessageBrd([values, ...messageBrd])
           console.log(JSON.stringify(values));
         } catch (error) {
           // This is for Networking Errors
