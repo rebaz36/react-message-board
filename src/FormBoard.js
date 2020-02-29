@@ -19,16 +19,20 @@ React.useEffect( () => {
   })();
 },[]);
 
+const userCredentials = { username: 'test', password: 'test1234' };
+
   
     const handleCallBack = (values =>{
-      
+      const basicString = `${userCredentials.username}:${userCredentials.password}`;
       (async () => {
+        
       
         try {
           // Make an API Request and store the Response
           await fetch(`http://10.21.75.37:3004/messages`, {
             method: 'POST',
             headers: {
+              'Authorization': `Basic ${btoa(basicString)}`,
               'Content-Type': 'application/json'
             },
             body: JSON.stringify({
