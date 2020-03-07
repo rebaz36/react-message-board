@@ -4,10 +4,17 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import MessageForm from './MessageForm';
 import MessageBoard from './MessageBoard';
+import LoginForm from './LoginForm';
+
+
 
 //This should be a GET
-export const FormBoard = ({user}) => {
+export const FormBoard = () => {
+const [user, setUser] = React.useState([]);
 const [messageBrd, setMessageBrd] = React.useState([]);
+var showForm = true;
+
+
 React.useEffect( () => {
   (async () => {
     try {
@@ -20,9 +27,27 @@ React.useEffect( () => {
   })();
 },[]);
 
-const userCredentials = { user };
-console.log("whatsgood" + userCredentials.name);
-  
+var userCredentials = { username: "", password: ""};
+
+  if(showForm == true){
+    const handleCallBack = (values =>{
+      setUser(values)
+      console.log("sup"+ user);
+      userCredentials = { username: user.name, password: user.pwd};
+      console.log("yo"+userCredentials.username);
+      showForm = false;
+    });
+    return (
+
+      <div>
+      <Row>
+          
+          <Col><LoginForm handleCallBack = {handleCallBack} /></Col>
+        </Row>
+       
+        </div>
+    )}else{
+
     const handleCallBack = (values =>{
       const basicString = `${userCredentials.username}:${userCredentials.password}`;
       (async () => {
@@ -55,12 +80,13 @@ return (
 
     <div>
     <Row>
+        <LoginForm handleCallBack = {handleCallBack} />
         <Col><MessageForm handleCallBack = {handleCallBack} /></Col>
       </Row>
       <Row>
         <Col><MessageBoard messageBrd = {messageBrd}/></Col>
       </Row>
       </div>
-)}
+)}}
 
 export default FormBoard
