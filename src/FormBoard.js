@@ -4,8 +4,9 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import MessageForm from './MessageForm';
 import MessageBoard from './MessageBoard';
+
 //This should be a GET
-export const FormBoard = () => {
+export const FormBoard = ({user}) => {
 const [messageBrd, setMessageBrd] = React.useState([]);
 React.useEffect( () => {
   (async () => {
@@ -19,8 +20,8 @@ React.useEffect( () => {
   })();
 },[]);
 
-const userCredentials = { username: 'test2', password: 'test1234' };
-
+const userCredentials = { user };
+console.log("whatsgood" + userCredentials.name);
   
     const handleCallBack = (values =>{
       const basicString = `${userCredentials.username}:${userCredentials.password}`;
