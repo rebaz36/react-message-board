@@ -31,7 +31,7 @@ export const LoginForm = ({className,handleCallBack}) =>  {
     //POST here somwhere
     const handleFormData = (values, actions) => { 
         handleCallBack(values);
-        console.log(values);
+        console.log("login"+JSON.stringify(values));
         actions.setSubmitting(false); }
  return (
 
@@ -77,6 +77,7 @@ export const LoginForm = ({className,handleCallBack}) =>  {
                         onBlur={handleBlur}
                         isValid={touched.pwd && !errors.pwd}
                         isInvalid={touched.pwd && errors.pwd}
+                        type="password"
                         ></Form.Control>
                     <Form.Control.Feedback type="invalid">
                         {errors.pwd}

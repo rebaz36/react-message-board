@@ -6,53 +6,49 @@ import MessageForm from './MessageForm';
 import MessageBoard from './MessageBoard';
 import LoginForm from './LoginForm';
 
-
-
-//This should be a GET
 export const FormBoard = () => {
-const [user, setUser] = React.useState([]);
-const [messageBrd, setMessageBrd] = React.useState([]);
-var showForm = true;
+  
+  const [user, setUser] = React.useState([]); 
+  const [messageBrd, setMessageBrd] = React.useState([]);
+  const [showForm, setShowForm] = React.useState(true);
 
+  React.useEffect( () => {
+    (async () => {
+      try {
+        const response = await(await fetch('http://10.21.75.37:3004/messages')).json();
+        console.log(response);
+        setMessageBrd(response);
+      }catch(error){
+        console.log('API Error: ' + error);
+      }
+    })();
+  },[]);
 
-React.useEffect( () => {
-  (async () => {
-    try {
-      const response = await(await fetch('http://10.21.75.37:3004/messages')).json();
-      console.log(response);
-      setMessageBrd(response);
-    }catch(error){
-      console.log('API Error: ' + error);
-    }
-  })();
-},[]);
+  var userCredentials = { username: "", password: ""};
 
-var userCredentials = { username: "", password: ""};
-
-  if(showForm == true){
+  if (showForm === true) {
     const handleCallBack = (values =>{
+      console.log(JSON.stringify(values));
       setUser(values)
-      console.log("sup"+ user);
-      userCredentials = { username: user.name, password: user.pwd};
-      console.log("yo"+userCredentials.username);
-      showForm = false;
+     
+      setShowForm(false);
+      console.log("user"+JSON.stringify(userCredentials));
+      
     });
     return (
-
       <div>
-      <Row>
-          
+        <Row>
           <Col><LoginForm handleCallBack = {handleCallBack} /></Col>
         </Row>
-       
-        </div>
-    )}else{
+      </div>
+    )
+  }else{
 
     const handleCallBack = (values =>{
+      userCredentials = { username: user.name, password: user.pwd};
+      console.log("crispy"+JSON.stringify(userCredentials));
       const basicString = `${userCredentials.username}:${userCredentials.password}`;
       (async () => {
-        
-      
         try {
           // Make an API Request and store the Response
           await fetch(`http://10.21.75.37:3004/messages`, {
@@ -74,19 +70,17 @@ var userCredentials = { username: "", password: ""};
           console.log('API Error: ' + error);
         }
       })();
-    
     })
-return (
-
+  return (
     <div>
-    <Row>
-        <LoginForm handleCallBack = {handleCallBack} />
+      <Row>
         <Col><MessageForm handleCallBack = {handleCallBack} /></Col>
       </Row>
       <Row>
         <Col><MessageBoard messageBrd = {messageBrd}/></Col>
       </Row>
       </div>
-)}}
+  )}
+}
 
 export default FormBoard
